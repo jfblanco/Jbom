@@ -46,7 +46,7 @@ public class PantallaJuego extends javax.swing.JFrame {
 
         jLabel1.setText("Bitacora");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ar/laboratorio/software/jbom/imagenes/bomba_50.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomServer/src/main/resources/imagenes/bomba_50.png")); // NOI18N
         jLabel2.setText("Jugando JBom");
 
         jLabel3.setText("Tiempo:");

@@ -9,12 +9,20 @@
             <Property name="text" type="java.lang.String" value="Cargar"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="menuArribaPregunta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pregunta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuArribaPreguntaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuArribaConfiguracion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Configuracion"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuArribaConfiguracionActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -130,7 +138,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/ar/laboratorio/software/jbom/imagenes/bomba.png"/>
+          <Image iconType="2" name="/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomServer/src/main/resources/imagenes/bomba.png"/>
         </Property>
       </Properties>
     </Component>
@@ -167,6 +175,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Comenzar !"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox1">
       <Properties>

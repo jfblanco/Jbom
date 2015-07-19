@@ -5,6 +5,8 @@
  */
 package ar.laboratorio.software.jbom.gui;
 
+import ar.laboratorio.software.jbom.domain.JBomCore;
+
 /**
  *
  * @author francisco
@@ -39,14 +41,15 @@ public class PantallaInicial extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuArribaPregunta = new javax.swing.JMenuItem();
+        menuArribaConfiguracion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ar/laboratorio/software/jbom/imagenes/bomba.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomServer/src/main/resources/imagenes/bomba.png")); // NOI18N
 
         jLabel2.setText("Bienvenido a Jbom, para comenzar seleccione la configuracion:");
 
@@ -63,18 +66,31 @@ public class PantallaInicial extends javax.swing.JFrame {
         jLabel5.setText("Tiempo maximo de espera");
 
         jButton1.setText("Comenzar !");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("Recalcular Grafo en ejecucion");
 
         jMenu1.setText("Cargar");
 
-        jMenuItem1.setText("Pregunta");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuArribaPregunta.setText("Pregunta");
+        menuArribaPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuArribaPreguntaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(menuArribaPregunta);
+
+        menuArribaConfiguracion.setText("Configuracion");
+        menuArribaConfiguracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuArribaConfiguracionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuArribaConfiguracion);
 
         jMenuBar1.add(jMenu1);
 
@@ -156,13 +172,22 @@ public class PantallaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void menuArribaPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArribaPreguntaActionPerformed
+        JBomCore.getInstance().getjBomGUI().getPreguntaCarga().setVisible(true);
+    }//GEN-LAST:event_menuArribaPreguntaActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void menuArribaConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArribaConfiguracionActionPerformed
+        JBomCore.getInstance().getjBomGUI().getConfiguracionCarga().setVisible(true);
+    }//GEN-LAST:event_menuArribaConfiguracionActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        JBomCore.getInstance().getjBomGUI().getPantallaJuego().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,10 +236,11 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JMenuItem menuArribaConfiguracion;
+    private javax.swing.JMenuItem menuArribaPregunta;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,8 +38,6 @@ public class PreguntaCarga extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
