@@ -14,7 +14,6 @@ public class App
         JBomCore jBomCore = JBomCore.getInstance();
         jBomCore.iniciarJBomCore();
         jBomCore.getjBomGUI().iniciarPantallas();
-        jBomCore.comenzarJuego();
-        System.out.println( "Cerrando Servidor, hasta luego!" );
+        jBomCore.getjBomGUI().getPantallaInicial().setVisible(true);
     }
 }

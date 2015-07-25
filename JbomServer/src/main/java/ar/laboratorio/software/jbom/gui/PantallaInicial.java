@@ -18,6 +18,9 @@ public class PantallaInicial extends javax.swing.JFrame {
      */
     public PantallaInicial() {
         initComponents();
+        inputJugadoresMaximo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getJugadoresMaximo()));
+        inputJugadoresMinimo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getJugadoresMinimo()));
+        inputTiempoDeJuego.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getTiempoMinimo()));
     }
 
     /**
@@ -32,13 +35,14 @@ public class PantallaInicial extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        inputJugadoresMaximo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        inputJugadoresMinimo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        inputTiempoDeJuego = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuArribaPregunta = new javax.swing.JMenuItem();
@@ -55,15 +59,15 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         jLabel3.setText("Maximo de jugadores");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        inputJugadoresMaximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                inputJugadoresMaximoActionPerformed(evt);
             }
         });
 
         jLabel4.setText("minimo de jugadores");
 
-        jLabel5.setText("Tiempo maximo de espera");
+        jLabel5.setText("Tiempo de Juego");
 
         jButton1.setText("Comenzar !");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +77,8 @@ public class PantallaInicial extends javax.swing.JFrame {
         });
 
         jCheckBox1.setText("Recalcular Grafo en ejecucion");
+
+        jLabel6.setText("minutos");
 
         jMenu1.setText("Cargar");
 
@@ -128,16 +134,18 @@ public class PantallaInicial extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputJugadoresMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputJugadoresMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputTiempoDeJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6))
                     .addComponent(jCheckBox1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -151,13 +159,14 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputJugadoresMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputJugadoresMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputTiempoDeJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
@@ -168,9 +177,9 @@ public class PantallaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void inputJugadoresMaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputJugadoresMaximoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_inputJugadoresMaximoActionPerformed
 
     private void menuArribaPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArribaPreguntaActionPerformed
         JBomCore.getInstance().getjBomGUI().getPreguntaCarga().setVisible(true);
@@ -185,8 +194,9 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_menuArribaConfiguracionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        JBomCore.getInstance().getjBomGUI().getPantallaJuego().setVisible(true);
+        this.setVisible(false);    
+        JBomCore.getInstance().getjBomGUI().getPantallaJuego().setVisible(true);    
+        JBomCore.getInstance().comenzarJuego();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -225,6 +235,9 @@ public class PantallaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField inputJugadoresMaximo;
+    private javax.swing.JTextField inputJugadoresMinimo;
+    private javax.swing.JTextField inputTiempoDeJuego;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
@@ -232,14 +245,12 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JMenuItem menuArribaConfiguracion;
     private javax.swing.JMenuItem menuArribaPregunta;
     // End of variables declaration//GEN-END:variables

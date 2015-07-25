@@ -18,6 +18,11 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
      */
     public ConfiguracionCarga() {
         initComponents();
+        inputJugadoresMaximo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getJugadoresMaximo()));
+        inputJugadoresMinimo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getJugadoresMinimo()));
+        inputPuerto.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getPort()));
+        inputTiempoEsperaMaximo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getTiempoMaximo()));
+        inputTiempoJuego.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getTiempoMinimo()));
     }
 
     /**

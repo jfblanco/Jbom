@@ -8,6 +8,8 @@ package ar.laboratorio.software.jbom.domain;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.net.ServerSocketFactory;
@@ -25,6 +27,7 @@ public class JBomCore {
     private ServerSocket serverSocket;
     private ServerSocketFactory serverSocketFactory;
     private Boolean jugando = true;
+    private List<Pregunta> preguntas = new ArrayList<Pregunta>();
     
     private JBomCore(){
     
@@ -39,10 +42,11 @@ public class JBomCore {
     public void iniciarJBomCore(){
         jBomGUI = new JBomGUI();
         jBomConfig = new JBomConfig();
+        jBomConfig.cargar();
         serverSocketFactory = ServerSocketFactory.getDefault();
         try {
             serverSocket = serverSocketFactory.createServerSocket(jBomConfig.getPort());
-            Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Se Inicio el servidor en el puerto: "+String.valueOf(jBomConfig.getPort()));
+            Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "El puerto de conexion es: "+String.valueOf(jBomConfig.getPort()));
         } catch (IOException ex) {
             Logger.getLogger(JBomCore.class.getName()).log(Level.WARNING, "No se puede iniciar el puerto: "+String.valueOf(jBomConfig.getPort()), ex);
             System.exit(-1);
@@ -58,17 +62,22 @@ public class JBomCore {
     }    
 
     public void comenzarJuego() {
-        jBomGUI.getPantallaInicial().setVisible(true);
-        while(jugando){
-            Socket socket;
-            try {
-                socket = serverSocket.accept();
-                Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Creando puerto cliente: "+String.valueOf(socket.getLocalPort()));
-            } catch (IOException ex) {
-                Logger.getLogger(JBomCore.class.getName()).log(Level.SEVERE, null, ex);
-            }            
-        }
-        cerrarPuerto();
+        Runnable runner = new Runnable() {
+                                            public void run() 
+                                            {
+                                                while(jugando){
+                                                    try {
+                                                        Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Esperando por Jugadores...");
+                                                        Socket socket = serverSocket.accept();
+                                                        Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Creando puerto cliente: "+String.valueOf(socket.getPort()));
+                                                    } catch (IOException ex) {
+                                                        Logger.getLogger(JBomCore.class.getName()).log(Level.SEVERE, null, ex);
+                                                    }            
+                                                }
+                                                cerrarPuerto();
+                                            }
+                                        };
+        new Thread(runner).start();
     }
 
     public JBomConfig getjBomConfig() {
@@ -85,6 +94,14 @@ public class JBomCore {
 
     public void setJugando(Boolean jugando) {
         this.jugando = jugando;
+    }
+
+    public List<Pregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(List<Pregunta> preguntas) {
+        this.preguntas = preguntas;
     }
 
     private void cerrarPuerto() {
