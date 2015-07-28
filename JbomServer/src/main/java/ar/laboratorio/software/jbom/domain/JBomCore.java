@@ -28,6 +28,7 @@ public class JBomCore {
     private ServerSocketFactory serverSocketFactory;
     private Boolean jugando = true;
     private List<Pregunta> preguntas = new ArrayList<Pregunta>();
+    private List<JBomUser> jugadores = new ArrayList<JBomUser>();
     
     private JBomCore(){
     
@@ -65,14 +66,22 @@ public class JBomCore {
         Runnable runner = new Runnable() {
                                             public void run() 
                                             {
-                                                while(jugando){
+                                                while(jugadores.size() < jBomConfig.getJugadoresMinimo()){
                                                     try {
                                                         Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Esperando por Jugadores...");
                                                         Socket socket = serverSocket.accept();
-                                                        Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Creando puerto cliente: "+String.valueOf(socket.getPort()));
+                                                        JBomUser jBomUser = new JBomUser();
+                                                        jBomUser.crearJugador(socket);
+                                                        jugadores.add(jBomUser);
+                                                        jBomGUI.dibujarImagenJugador(100, 300, jBomUser.getUsername());
+                                                        jBomGUI.mostrarMensaje("se conecto el jugador "+jBomUser.getUsername());
                                                     } catch (IOException ex) {
                                                         Logger.getLogger(JBomCore.class.getName()).log(Level.SEVERE, null, ex);
                                                     }            
+                                                }
+                                                Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Todo listo, comenzando el juego");
+                                                while(jugando){
+                                                                
                                                 }
                                                 cerrarPuerto();
                                             }

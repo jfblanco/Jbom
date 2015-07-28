@@ -59,8 +59,16 @@ public class JBomGUI {
     public ConfiguracionCarga getConfiguracionCarga() {
         return configuracionCarga;
     }
+    
+    public void dibujarImagenJugador(Integer x, Integer y, String nombre){
+        this.pantallaJuego.dibujarImagenJugador(x, y, nombre);
+    }
 
     public void setConfiguracionCarga(ConfiguracionCarga configuracionCarga) {
         this.configuracionCarga = configuracionCarga;
     }    
+
+    void mostrarMensaje(String mensaje) {
+        this.pantallaJuego.mensajeBitacora(mensaje);
+    }
 }

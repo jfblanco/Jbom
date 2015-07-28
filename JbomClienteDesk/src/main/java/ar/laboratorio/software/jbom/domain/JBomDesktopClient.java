@@ -8,6 +8,7 @@ package ar.laboratorio.software.jbom.domain;
 import ar.laboratorio.software.jbom.gui.PantallaError;
 import ar.laboratorio.software.jbom.gui.PantallaInicial;
 import ar.laboratorio.software.jbom.gui.PantallaJuego;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -49,8 +50,11 @@ public class JBomDesktopClient {
         this.pantallaJuego = pantallaJuego;
     }
 
-    public void conectarServidor(String direccion, String puerto) throws IOException {
+    public void conectarServidor(String direccion, String puerto, String username) throws IOException {
         socket = new Socket(direccion, Integer.valueOf(puerto));
+        DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        dataOutputStream.writeUTF("{\"username\": \""+username+"\"}");
+        dataOutputStream.flush();
     }
 
     public PantallaError getPantallaError() {
