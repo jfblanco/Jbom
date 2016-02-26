@@ -51,6 +51,8 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         jLabel2.setText("Servidor: ");
 
+        inputServer.setText("127.0.0.1");
+
         jButton1.setText("Jugar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,7 +62,16 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         jLabel3.setText(":");
 
+        inputPort.setText("10155");
+
         jLabel4.setText("Nombre:");
+
+        inputName.setText("Jugador");
+        inputName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputNameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,6 +131,10 @@ public class PantallaInicial extends javax.swing.JFrame {
         }
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void inputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputNameActionPerformed
 
     /**
      * @param args the command line arguments
