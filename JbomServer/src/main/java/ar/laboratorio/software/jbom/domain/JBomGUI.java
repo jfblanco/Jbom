@@ -9,6 +9,7 @@ import ar.laboratorio.software.jbom.gui.ConfiguracionCarga;
 import ar.laboratorio.software.jbom.gui.PantallaInicial;
 import ar.laboratorio.software.jbom.gui.PantallaJuego;
 import ar.laboratorio.software.jbom.gui.PreguntaCarga;
+import javax.swing.JLabel;
 
 /**
  *
@@ -60,15 +61,15 @@ public class JBomGUI {
         return configuracionCarga;
     }
     
-    public void dibujarImagenJugador(Integer x, Integer y, String nombre){
-        this.pantallaJuego.dibujarImagenJugador(x, y, nombre);
+    public void dibujarImagenJugador(JLabel userIcon){
+        this.pantallaJuego.dibujarImagenJugador(userIcon);
     }
 
     public void setConfiguracionCarga(ConfiguracionCarga configuracionCarga) {
         this.configuracionCarga = configuracionCarga;
     }    
 
-    void mostrarMensaje(String mensaje) {
+    public void mostrarMensaje(String mensaje) {
         this.pantallaJuego.mensajeBitacora(mensaje);
     }
 }

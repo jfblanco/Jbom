@@ -5,14 +5,13 @@
  */
 package ar.laboratorio.software.jbom.domain;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import ar.laboratorio.software.jbom.connection.JBomConnectionManager;
+import ar.laboratorio.software.jbom.core.state.JBomCoreState;
+import ar.laboratorio.software.jbom.core.state.JBomCoreStateWaiting;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.net.ServerSocketFactory;
 
 /**
  *
@@ -24,11 +23,13 @@ public class JBomCore {
             
     private JBomGUI jBomGUI;
     private JBomConfig jBomConfig;
-    private ServerSocket serverSocket;
-    private ServerSocketFactory serverSocketFactory;
+    private JBomClock jBomClock;
+    private JBomCoreState jBomCoreState;
+    private JBomConnectionManager jBomConnectionManager;
     private Boolean jugando = true;
     private List<Pregunta> preguntas = new ArrayList<Pregunta>();
     private List<JBomUser> jugadores = new ArrayList<JBomUser>();
+    private List<JBomUser> jugadoresEnEspera = new ArrayList<JBomUser>();
     
     private JBomCore(){
     
@@ -43,15 +44,11 @@ public class JBomCore {
     public void iniciarJBomCore(){
         jBomGUI = new JBomGUI();
         jBomConfig = new JBomConfig();
-        jBomConfig.cargar();
-        serverSocketFactory = ServerSocketFactory.getDefault();
-        try {
-            serverSocket = serverSocketFactory.createServerSocket(jBomConfig.getPort());
-            Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "El puerto de conexion es: "+String.valueOf(jBomConfig.getPort()));
-        } catch (IOException ex) {
-            Logger.getLogger(JBomCore.class.getName()).log(Level.WARNING, "No se puede iniciar el puerto: "+String.valueOf(jBomConfig.getPort()), ex);
-            System.exit(-1);
-        }
+        jBomConfig.cargar();  
+        jBomClock = new JBomClock(instance);
+        jBomCoreState = new JBomCoreStateWaiting();
+        jBomConnectionManager = new JBomConnectionManager();      
+        jBomClock.start();        
     }
     
     public JBomGUI getjBomGUI() {
@@ -62,31 +59,13 @@ public class JBomCore {
         this.jBomGUI = jBomGUI;
     }    
 
-    public void comenzarJuego() {
-        Runnable runner = new Runnable() {
-                                            public void run() 
-                                            {
-                                                while(jugadores.size() < jBomConfig.getJugadoresMinimo()){
-                                                    try {
-                                                        Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Esperando por Jugadores...");
-                                                        Socket socket = serverSocket.accept();
-                                                        JBomUser jBomUser = new JBomUser();
-                                                        jBomUser.crearJugador(socket);
-                                                        jugadores.add(jBomUser);
-                                                        jBomGUI.dibujarImagenJugador(100, 300, jBomUser.getUsername());
-                                                        jBomGUI.mostrarMensaje("se conecto el jugador "+jBomUser.getUsername());
-                                                    } catch (IOException ex) {
-                                                        Logger.getLogger(JBomCore.class.getName()).log(Level.SEVERE, null, ex);
-                                                    }            
-                                                }
-                                                Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Todo listo, comenzando el juego");
-                                                while(jugando){
-                                                                
-                                                }
-                                                cerrarPuerto();
-                                            }
-                                        };
-        new Thread(runner).start();
+    public void abrirPuerto() {
+        JBomCore.getInstance().getjBomGUI().mostrarMensaje("Esperando por Jugadores...");
+        new Thread(jBomConnectionManager).start();
+    }
+    
+    public void tick(){
+        this.jBomCoreState.update();
     }
 
     public JBomConfig getjBomConfig() {
@@ -112,13 +91,56 @@ public class JBomCore {
     public void setPreguntas(List<Pregunta> preguntas) {
         this.preguntas = preguntas;
     }
-
-    private void cerrarPuerto() {
+    
+    public void closeCore() {
         try {
-            serverSocket.close();
-            Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "Cerrando el puerto: "+String.valueOf(jBomConfig.getPort()));
-        } catch (IOException ex) {
+            System.out.println("Cerrando El core de JBom");
+            jBomClock.stop();
+            jBomClock.wait();
+            System.out.println("Listo");
+            System.exit(0);
+        } catch (InterruptedException ex) {
             Logger.getLogger(JBomCore.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
+    }
+
+    public JBomClock getjBomClock() {
+        return jBomClock;
+    }
+
+    public void setjBomClock(JBomClock jBomClock) {
+        this.jBomClock = jBomClock;
+    }    
+
+    public JBomCoreState getjBomCoreState() {
+        return jBomCoreState;
+    }
+
+    public void setjBomCoreState(JBomCoreState jBomCoreState) {
+        this.jBomCoreState = jBomCoreState;
+    }
+
+    public JBomConnectionManager getjBomConnectionManager() {
+        return jBomConnectionManager;
+    }
+
+    public void setjBomConnectionManager(JBomConnectionManager jBomConnectionManager) {
+        this.jBomConnectionManager = jBomConnectionManager;
+    }
+
+    public List<JBomUser> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(List<JBomUser> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public List<JBomUser> getJugadoresEnEspera() {
+        return jugadoresEnEspera;
+    }
+
+    public void setJugadoresEnEspera(List<JBomUser> jugadoresEnEspera) {
+        this.jugadoresEnEspera = jugadoresEnEspera;
     }
 }

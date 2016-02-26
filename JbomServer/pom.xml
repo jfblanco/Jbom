@@ -10,7 +10,8 @@
       <configuration>
         <archive>
           <manifest>
-            <mainClass>ar.laboratorio.software.jbom.App</mainClass>
+              <addClasspath>true</addClasspath>
+              <mainClass>ar.laboratorio.software.jbom.App</mainClass>
           </manifest>
         </archive>
         <descriptorRefs>

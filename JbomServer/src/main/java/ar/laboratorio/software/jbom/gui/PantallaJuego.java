@@ -5,7 +5,7 @@
  */
 package ar.laboratorio.software.jbom.gui;
 
-import java.awt.Color;
+import javax.swing.JLabel;
 
 /**
  *
@@ -39,6 +39,14 @@ public class PantallaJuego extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         inputBitacora.setModel(new BitacoraModel());
         jScrollPane1.setViewportView(inputBitacora);
@@ -108,12 +116,24 @@ public class PantallaJuego extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void dibujarImagenJugador(Integer x, Integer y, String nombre){
-        ((GamePanel)this.gameCanvas).dibujarImagenJugador(x, y, nombre);
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    public void dibujarImagenJugador(JLabel userIcon){
+        ((GamePanel)this.gameCanvas).dibujarImagenJugador(userIcon);
     }
     
     public void mensajeBitacora(String mensaje){
         ((BitacoraModel)(inputBitacora.getModel())).add(mensaje);
+    }
+    
+    public GamePanel getGamePanel(){
+        return (GamePanel) this.gameCanvas;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

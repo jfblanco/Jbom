@@ -5,12 +5,13 @@
  */
 package ar.laboratorio.software.jbom.domain;
 
+import java.awt.Dimension;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import org.json.JSONObject;
 
 /**
@@ -25,6 +26,7 @@ public class JBomUser {
     private String username;
     private Boolean jugando;
     private JSONObject jSONObject;
+    private JLabel userIcon;
     
     public void crearJugador(Socket socket) throws IOException{
         this.dataInputStream = new DataInputStream(socket.getInputStream());
@@ -33,7 +35,19 @@ public class JBomUser {
         this.username = jSONObject.getString("username");
         this.socket = socket;
         this.jugando = true;
-        Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "El usuario: "+username+" se ha unido al juego");
+        this.userIcon = new JLabel();     
+        userIcon.setSize(150, 50);
+        
+        Dimension dimension = JBomCore.getInstance().getjBomGUI().getPantallaJuego().getGamePanel().getSize();
+        Double seedX = Math.random();
+        Double posX =  dimension.getWidth() * seedX;        
+        Double seedY = Math.random();
+        Double posY = dimension.getHeight()* seedY;
+        
+        userIcon.setLocation(posX.intValue(),posY.intValue());
+        userIcon.setText(this.username+"[ID:"+JBomCore.getInstance().getJugadores().size()+"]");
+        userIcon.setIcon(new ImageIcon(JBomCore.getInstance().getjBomGUI().getPantallaJuego().getGamePanel().getImageUsuario()));
+        userIcon.setDisabledIcon(new ImageIcon(JBomCore.getInstance().getjBomGUI().getPantallaJuego().getGamePanel().getImageUsuarioConBomba()));
     }
     
     public DataInputStream getDataInputStream() {
@@ -92,5 +106,13 @@ public class JBomUser {
             }
         }
         
+    }
+
+    public JLabel getUserIcon() {
+        return userIcon;
+    }
+
+    public void setUserIcon(JLabel userIcon) {
+        this.userIcon = userIcon;
     }
 }
