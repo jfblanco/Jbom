@@ -61,8 +61,8 @@ public class JBomGUI {
         return configuracionCarga;
     }
     
-    public void dibujarImagenJugador(JLabel userIcon){
-        this.pantallaJuego.dibujarImagenJugador(userIcon);
+    public void dibujarImagenJugador(JLabel userIcon,JLabel norte,JLabel sur,JLabel este,JLabel oeste){
+        this.pantallaJuego.dibujarImagenJugador(userIcon,norte,sur,este,oeste);
     }
 
     public void setConfiguracionCarga(ConfiguracionCarga configuracionCarga) {

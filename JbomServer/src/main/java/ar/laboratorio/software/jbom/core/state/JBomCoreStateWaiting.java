@@ -28,11 +28,11 @@ public class JBomCoreStateWaiting implements JBomCoreState{
 
     public void jugadorConectado(JBomUser jBomUser) {
         JBomCore.getInstance().getJugadores().add(jBomUser);
-        JBomCore.getInstance().getjBomGUI().dibujarImagenJugador(jBomUser.getUserIcon());
+        JBomCore.getInstance().getjBomGUI().dibujarImagenJugador(jBomUser.getUserIcon(), jBomUser.getVecinoNorteLabel(),jBomUser.getVecinoSurLabel(),jBomUser.getVecinoEsteLabel(),jBomUser.getVecinoOesteLabel());
         JBomCore.getInstance().getjBomGUI().mostrarMensaje("se conecto el jugador "+jBomUser.getUsername());
+        JBomCore.getInstance().recalcularGrafoDeJuego();
         if(JBomCore.getInstance().getJugadores().size() >= JBomCore.getInstance().getjBomConfig().getJugadoresMinimo()){
-            JBomCore.getInstance().getjBomGUI().mostrarMensaje("Todo listo, comenzando el juego");
-            JBomCore.getInstance().getjBomCoreState().changeToPlay();
+            JBomCore.getInstance().comenzarJuego();
         }            
     }
     

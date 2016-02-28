@@ -10,8 +10,10 @@ import ar.laboratorio.software.jbom.core.state.JBomCoreState;
 import ar.laboratorio.software.jbom.core.state.JBomCoreStateWaiting;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -27,6 +29,9 @@ public class JBomCore {
     private JBomCoreState jBomCoreState;
     private JBomConnectionManager jBomConnectionManager;
     private Boolean jugando = true;
+    private Boolean recalcularGrafo = false;
+    private DateTime startTime;
+    private DateTime currentTime;
     private List<Pregunta> preguntas = new ArrayList<Pregunta>();
     private List<JBomUser> jugadores = new ArrayList<JBomUser>();
     private List<JBomUser> jugadoresEnEspera = new ArrayList<JBomUser>();
@@ -49,6 +54,28 @@ public class JBomCore {
         jBomCoreState = new JBomCoreStateWaiting();
         jBomConnectionManager = new JBomConnectionManager();      
         jBomClock.start();        
+    }
+    
+    public void recalcularGrafoDeJuego(){
+        for(JBomUser jBomUser : this.jugadores){
+            jBomUser.setVecinoNorte(jugadores.get(new Random().nextInt(jugadores.size())));
+            jBomUser.setVecinoSur(jugadores.get(new Random().nextInt(jugadores.size())));
+            jBomUser.setVecinoEste(jugadores.get(new Random().nextInt(jugadores.size())));
+            jBomUser.setVecinoOeste(jugadores.get(new Random().nextInt(jugadores.size())));
+        }
+    }
+    
+    public void comenzarJuego() {
+        jBomGUI.mostrarMensaje("Todo listo, comenzando el juego");
+        startTime = DateTime.now();
+        jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(startTime.toString("mm:ss"));
+        jugadores.get(new Random().nextInt(jugadores.size())).tenesLaBomba();
+        jBomCoreState.changeToPlay();
+    }
+    
+    public void updatePlaying(){
+        currentTime = DateTime.now().minus(startTime.getMillis());
+        jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(currentTime.toString("mm:ss"));
     }
     
     public JBomGUI getjBomGUI() {
@@ -142,5 +169,29 @@ public class JBomCore {
 
     public void setJugadoresEnEspera(List<JBomUser> jugadoresEnEspera) {
         this.jugadoresEnEspera = jugadoresEnEspera;
+    }
+
+    public Boolean getRecalcularGrafo() {
+        return recalcularGrafo;
+    }
+
+    public void setRecalcularGrafo(Boolean recalcularGrafo) {
+        this.recalcularGrafo = recalcularGrafo;
+    }
+
+    public DateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(DateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public DateTime getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(DateTime currentTime) {
+        this.currentTime = currentTime;
     }
 }

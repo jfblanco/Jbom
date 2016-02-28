@@ -23,7 +23,7 @@ public class JBomCoreStatePlaying implements JBomCoreState{
     }
 
     public void update() {
-        
+        JBomCore.getInstance().updatePlaying();
     }
 
     public void jugadorConectado(JBomUser jBomUser) {

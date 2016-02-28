@@ -6,6 +6,7 @@
 package ar.laboratorio.software.jbom.gui;
 
 import ar.laboratorio.software.jbom.domain.JBomCore;
+import javax.swing.JTextField;
 
 /**
  *
@@ -82,6 +83,11 @@ public class PantallaInicial extends javax.swing.JFrame {
         });
 
         jCheckBox1.setText("Recalcular Grafo en ejecucion");
+        jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox1StateChanged(evt);
+            }
+        });
 
         jLabel6.setText("minutos");
 
@@ -211,6 +217,10 @@ public class PantallaInicial extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowClosing
 
+    private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
+       JBomCore.getInstance().setRecalcularGrafo(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jCheckBox1StateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inputJugadoresMaximo;
     private javax.swing.JTextField inputJugadoresMinimo;
@@ -231,4 +241,30 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuArribaConfiguracion;
     private javax.swing.JMenuItem menuArribaPregunta;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getInputJugadoresMaximo() {
+        return inputJugadoresMaximo;
+    }
+
+    public void setInputJugadoresMaximo(JTextField inputJugadoresMaximo) {
+        this.inputJugadoresMaximo = inputJugadoresMaximo;
+    }
+
+    public JTextField getInputJugadoresMinimo() {
+        return inputJugadoresMinimo;
+    }
+
+    public void setInputJugadoresMinimo(JTextField inputJugadoresMinimo) {
+        this.inputJugadoresMinimo = inputJugadoresMinimo;
+    }
+
+    public JTextField getInputTiempoDeJuego() {
+        return inputTiempoDeJuego;
+    }
+
+    public void setInputTiempoDeJuego(JTextField inputTiempoDeJuego) {
+        this.inputTiempoDeJuego = inputTiempoDeJuego;
+    }
+
+    
 }

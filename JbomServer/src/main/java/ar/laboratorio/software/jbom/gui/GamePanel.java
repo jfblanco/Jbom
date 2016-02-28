@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
@@ -40,8 +39,12 @@ public class GamePanel extends JPanel{
         
     }
     
-    public void dibujarImagenJugador(JLabel userIcon){
+    public void dibujarImagenJugador(JLabel userIcon, JLabel norte,JLabel sur,JLabel este,JLabel oeste){
         this.add(userIcon);
+        this.add(norte);
+        this.add(sur);
+        this.add(este);
+        this.add(oeste);
         this.repaint();
     }
 

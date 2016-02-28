@@ -34,7 +34,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        tiempoDeJuego = new javax.swing.JLabel();
         gameCanvas = new GamePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,7 +58,7 @@ public class PantallaJuego extends javax.swing.JFrame {
 
         jLabel3.setText("Tiempo:");
 
-        jLabel4.setText("00:00");
+        tiempoDeJuego.setText("00:00");
 
         javax.swing.GroupLayout gameCanvasLayout = new javax.swing.GroupLayout(gameCanvas);
         gameCanvas.setLayout(gameCanvasLayout);
@@ -90,7 +90,7 @@ public class PantallaJuego extends javax.swing.JFrame {
                         .addGap(157, 157, 157)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
+                        .addComponent(tiempoDeJuego)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -104,7 +104,7 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(tiempoDeJuego))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gameCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -124,8 +124,8 @@ public class PantallaJuego extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowClosing
 
-    public void dibujarImagenJugador(JLabel userIcon){
-        ((GamePanel)this.gameCanvas).dibujarImagenJugador(userIcon);
+    public void dibujarImagenJugador(JLabel userIcon,JLabel norte,JLabel sur,JLabel este,JLabel oeste){
+        ((GamePanel)this.gameCanvas).dibujarImagenJugador(userIcon,norte,sur,este,oeste);
     }
     
     public void mensajeBitacora(String mensaje){
@@ -142,7 +142,15 @@ public class PantallaJuego extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel tiempoDeJuego;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getTiempoDeJuego() {
+        return tiempoDeJuego;
+    }
+
+    public void setTiempoDeJuego(JLabel tiempoDeJuego) {
+        this.tiempoDeJuego = tiempoDeJuego;
+    }    
 }
