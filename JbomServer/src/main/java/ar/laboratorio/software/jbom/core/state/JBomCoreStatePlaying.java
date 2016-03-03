@@ -14,12 +14,10 @@ import ar.laboratorio.software.jbom.domain.JBomUser;
  */
 public class JBomCoreStatePlaying implements JBomCoreState{
 
-    public void changeToPlay() {
-        
-    }
-
-    public void changeToWait() {
-        JBomCore.getInstance().setjBomCoreState(new JBomCoreStateWaiting());
+    public void changeState() {
+        JBomCore.getInstance().getjBomGUI().mostrarMensaje("Se Termino el tiempo de juego");        
+        JBomCore.getInstance().getjBomGUI().getPantallaJuego().getTiempoDeJuego().setText("--:--");
+        JBomCore.getInstance().setjBomCoreState(new JBomCoreStateEnding());
     }
 
     public void update() {

@@ -91,6 +91,10 @@ public class JBomUser {
         vecinoSurLabel.setText(String.valueOf(this.gameId));
         vecinoEsteLabel.setText(String.valueOf(this.gameId));
         vecinoOesteLabel.setText(String.valueOf(this.gameId));
+    }   
+
+    void sendMessage(String message) {
+        
     }
     
     void tenesLaBomba() {

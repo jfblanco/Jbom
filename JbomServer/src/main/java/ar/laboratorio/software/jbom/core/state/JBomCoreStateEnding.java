@@ -5,17 +5,25 @@
  */
 package ar.laboratorio.software.jbom.core.state;
 
+import ar.laboratorio.software.jbom.domain.JBomCore;
 import ar.laboratorio.software.jbom.domain.JBomUser;
 
 /**
  *
  * @author Francisco Blanco <blanco.jose.francisco@gmail.com>
  */
-public interface JBomCoreState {
+public class JBomCoreStateEnding implements JBomCoreState{
+
+    public void jugadorConectado(JBomUser jBomUser) {
+        
+    }
+
+    public void changeState() {
+        
+    }
+
+    public void update() {
+        
+    }
     
-    public void jugadorConectado(JBomUser jBomUser);
-    
-    public void changeState();
-    
-    public void update();
 }

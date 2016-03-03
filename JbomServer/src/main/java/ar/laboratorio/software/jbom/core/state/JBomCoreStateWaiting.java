@@ -14,12 +14,8 @@ import ar.laboratorio.software.jbom.domain.JBomUser;
  */
 public class JBomCoreStateWaiting implements JBomCoreState{
 
-    public void changeToPlay() {
+    public void changeState() {
         JBomCore.getInstance().setjBomCoreState(new JBomCoreStatePlaying());
-    }
-
-    public void changeToWait() {
-        
     }
 
     public void update() {

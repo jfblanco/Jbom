@@ -11,8 +11,6 @@ import ar.laboratorio.software.jbom.core.state.JBomCoreStateWaiting;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.joda.time.DateTime;
 
 /**
@@ -31,6 +29,7 @@ public class JBomCore {
     private Boolean jugando = true;
     private Boolean recalcularGrafo = false;
     private DateTime startTime;
+    private DateTime endTime;
     private DateTime currentTime;
     private List<Pregunta> preguntas = new ArrayList<Pregunta>();
     private List<JBomUser> jugadores = new ArrayList<JBomUser>();
@@ -68,14 +67,23 @@ public class JBomCore {
     public void comenzarJuego() {
         jBomGUI.mostrarMensaje("Todo listo, comenzando el juego");
         startTime = DateTime.now();
+        endTime = startTime.plusMinutes(Integer.valueOf(jBomGUI.getPantallaInicial().getInputTiempoDeJuego().getText().split(":")[0]));
         jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(startTime.toString("mm:ss"));
         jugadores.get(new Random().nextInt(jugadores.size())).tenesLaBomba();
-        jBomCoreState.changeToPlay();
+        jBomCoreState.changeState();
     }
     
     public void updatePlaying(){
-        currentTime = DateTime.now().minus(startTime.getMillis());
-        jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(currentTime.toString("mm:ss"));
+        currentTime = DateTime.now();
+        jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(endTime.minus(currentTime.getMillis()).toString("mm:ss"));
+        if(endTime.minus(currentTime.getMillis()).getMillis() <= 0.0)
+            jBomCoreState.changeState();
+    }
+    
+    public void broadCastMessage(String message){
+        for(JBomUser jBomUser : jugadores){
+            jBomUser.sendMessage(message);
+        }
     }
     
     public JBomGUI getjBomGUI() {
@@ -120,15 +128,10 @@ public class JBomCore {
     }
     
     public void closeCore() {
-        try {
-            System.out.println("Cerrando El core de JBom");
-            jBomClock.stop();
-            jBomClock.wait();
-            System.out.println("Listo");
-            System.exit(0);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(JBomCore.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       System.out.println("Cerrando El core de JBom");
+       jBomClock.stop();
+       System.out.println("Listo");
+       System.exit(0);
     }
 
     public JBomClock getjBomClock() {
