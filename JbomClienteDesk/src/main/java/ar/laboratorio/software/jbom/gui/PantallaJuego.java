@@ -5,6 +5,9 @@
  */
 package ar.laboratorio.software.jbom.gui;
 
+import ar.laboratorio.software.jbom.domain.JBomDesktopClient;
+import org.json.JSONObject;
+
 /**
  *
  * @author francisco
@@ -32,16 +35,17 @@ public class PantallaJuego extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel3 = new javax.swing.JLabel();
-        inputPregunta = new javax.swing.JTextField();
-        radioOpcion1 = new javax.swing.JRadioButton();
-        radioOpcion2 = new javax.swing.JRadioButton();
-        radioOpcion3 = new javax.swing.JRadioButton();
-        radioOpcion4 = new javax.swing.JRadioButton();
+        inputQuestion = new javax.swing.JTextField();
+        optionOne = new javax.swing.JRadioButton();
+        optionTwo = new javax.swing.JRadioButton();
+        optionThree = new javax.swing.JRadioButton();
+        optionFour = new javax.swing.JRadioButton();
+        answerButton = new javax.swing.JButton();
         butonLeft = new javax.swing.JButton();
         botonRight = new javax.swing.JButton();
         botonDown = new javax.swing.JButton();
         butonUp = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        messageInput = new javax.swing.JTextField();
 
         jLabel2.setText("jLabel2");
 
@@ -53,24 +57,32 @@ public class PantallaJuego extends javax.swing.JFrame {
 
         jLabel3.setText("Pregunta: ");
 
-        inputPregunta.setEditable(false);
-        inputPregunta.addActionListener(new java.awt.event.ActionListener() {
+        inputQuestion.setEditable(false);
+        inputQuestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPreguntaActionPerformed(evt);
+                inputQuestionActionPerformed(evt);
             }
         });
 
-        radioOpcion1.setText("jRadioButton1");
-        buttonGroup1.add(radioOpcion1);
+        buttonGroup1.add(optionOne);
+        optionOne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionOneActionPerformed(evt);
+            }
+        });
 
-        radioOpcion2.setText("jRadioButton2");
-        buttonGroup1.add(radioOpcion2);
+        buttonGroup1.add(optionTwo);
 
-        radioOpcion3.setText("jRadioButton3");
-        buttonGroup1.add(radioOpcion3);
+        buttonGroup1.add(optionThree);
 
-        radioOpcion4.setText("jRadioButton4");
-        buttonGroup1.add(radioOpcion4);
+        buttonGroup1.add(optionFour);
+
+        answerButton.setText("Responder");
+        answerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answerButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -81,14 +93,15 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inputPregunta)
+                    .addComponent(inputQuestion)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(radioOpcion4)
-                            .addComponent(radioOpcion3)
-                            .addComponent(radioOpcion2)
-                            .addComponent(radioOpcion1))
-                        .addGap(0, 273, Short.MAX_VALUE)))
+                            .addComponent(answerButton)
+                            .addComponent(optionFour)
+                            .addComponent(optionThree)
+                            .addComponent(optionTwo)
+                            .addComponent(optionOne))
+                        .addGap(0, 279, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -97,23 +110,26 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(inputPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(radioOpcion1)
-                .addGap(18, 18, 18)
-                .addComponent(radioOpcion2)
-                .addGap(18, 18, 18)
-                .addComponent(radioOpcion3)
-                .addGap(18, 18, 18)
-                .addComponent(radioOpcion4)
-                .addGap(21, 21, 21))
+                    .addComponent(inputQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(optionOne)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optionTwo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optionThree)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optionFour)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(answerButton)
+                .addGap(18, 18, 18))
         );
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(inputPregunta, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(radioOpcion1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(radioOpcion2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(radioOpcion3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(radioOpcion4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(inputQuestion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(optionOne, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(optionTwo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(optionThree, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(optionFour, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(answerButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         butonLeft.setIcon(new javax.swing.ImageIcon("/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomClienteDesk/src/main/resources/imagenes/left_arrow.png")); // NOI18N
         butonLeft.addActionListener(new java.awt.event.ActionListener() {
@@ -123,8 +139,18 @@ public class PantallaJuego extends javax.swing.JFrame {
         });
 
         botonRight.setIcon(new javax.swing.ImageIcon("/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomClienteDesk/src/main/resources/imagenes/right_arrow.png")); // NOI18N
+        botonRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRightActionPerformed(evt);
+            }
+        });
 
         botonDown.setIcon(new javax.swing.ImageIcon("/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomClienteDesk/src/main/resources/imagenes/down_arrow.png")); // NOI18N
+        botonDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonDownActionPerformed(evt);
+            }
+        });
 
         butonUp.setIcon(new javax.swing.ImageIcon("/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomClienteDesk/src/main/resources/imagenes/up_arrow.png")); // NOI18N
         butonUp.addActionListener(new java.awt.event.ActionListener() {
@@ -143,18 +169,14 @@ public class PantallaJuego extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1))
+                        .addComponent(messageInput))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(butonLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(botonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLayeredPane1)
-                                    .addComponent(butonUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLayeredPane1)
+                            .addComponent(botonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(butonUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonRight, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
@@ -165,12 +187,12 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(messageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(butonLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(butonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(butonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLayeredPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,32 +205,118 @@ public class PantallaJuego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonLeftActionPerformed
-        // TODO add your handling code here:
+        JBomDesktopClient.getInstance().selectWestGate();
+        this.disableBottons();
+        this.cleanQuestion();
     }//GEN-LAST:event_butonLeftActionPerformed
 
     private void butonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonUpActionPerformed
-        // TODO add your handling code here:
+        JBomDesktopClient.getInstance().selectNorthGate();
+        this.disableBottons();
+        this.cleanQuestion();
     }//GEN-LAST:event_butonUpActionPerformed
 
-    private void inputPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPreguntaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPreguntaActionPerformed
+    private void inputQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputQuestionActionPerformed
+        
+    }//GEN-LAST:event_inputQuestionActionPerformed
 
+    private void optionOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionOneActionPerformed
+        
+    }//GEN-LAST:event_optionOneActionPerformed
+
+    private void answerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerButtonActionPerformed
+        if(optionOne.isSelected())
+            JBomDesktopClient.getInstance().answerdQuestion(optionOne.getText());
+        if(optionTwo.isSelected())
+            JBomDesktopClient.getInstance().answerdQuestion(optionTwo.getText());
+        if(optionThree.isSelected())
+            JBomDesktopClient.getInstance().answerdQuestion(optionThree.getText());
+        if(optionFour.isSelected())
+            JBomDesktopClient.getInstance().answerdQuestion(optionFour.getText());
+        this.disableUI();
+    }//GEN-LAST:event_answerButtonActionPerformed
+
+    private void botonDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDownActionPerformed
+        JBomDesktopClient.getInstance().selectSouthGate();
+        this.disableBottons();
+        this.cleanQuestion();
+    }//GEN-LAST:event_botonDownActionPerformed
+
+    private void botonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRightActionPerformed
+        JBomDesktopClient.getInstance().selectEastGate();
+        this.disableBottons();
+        this.cleanQuestion();
+    }//GEN-LAST:event_botonRightActionPerformed
+
+    public void publishMessage(String message){
+        messageInput.setText(message);
+    }
+    
+    public void disableUI(){
+        inputQuestion.setEnabled(false);
+        optionOne.setEnabled(false);
+        optionTwo.setEnabled(false);
+        optionThree.setEnabled(false);
+        optionFour.setEnabled(false);
+        answerButton.setEnabled(false);
+    }
+    
+    public void enableBottons(){
+        butonUp.setEnabled(true);
+        botonDown.setEnabled(true);
+        botonRight.setEnabled(true);
+        butonLeft.setEnabled(true);
+    }
+    
+    public void disableBottons(){
+        butonUp.setEnabled(false);
+        botonDown.setEnabled(false);
+        botonRight.setEnabled(false);
+        butonLeft.setEnabled(false);  
+    }
+    
+    public void enableUI(){
+        inputQuestion.setEnabled(true);
+        optionOne.setEnabled(true);
+        optionTwo.setEnabled(true);
+        optionThree.setEnabled(true);
+        optionFour.setEnabled(true);
+        answerButton.setEnabled(true);
+    }
+    
+    public void showQuestion(String question){
+        JSONObject questionJSON = new JSONObject(question);
+        inputQuestion.setText(questionJSON.getString("pregunta"));
+        optionOne.setText(questionJSON.getString("opcionUno"));
+        optionTwo.setText(questionJSON.getString("opcionDos"));
+        optionThree.setText(questionJSON.getString("opcionTres"));
+        optionFour.setText(questionJSON.getString("opcionCuatro"));
+    }
+    
+    public void cleanQuestion(){
+        inputQuestion.setText("");
+        optionOne.setText("");
+        optionTwo.setText("");
+        optionThree.setText("");
+        optionFour.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton answerButton;
     private javax.swing.JButton botonDown;
     private javax.swing.JButton botonRight;
     private javax.swing.JButton butonLeft;
     private javax.swing.JButton butonUp;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField inputPregunta;
+    private javax.swing.JTextField inputQuestion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JRadioButton radioOpcion1;
-    private javax.swing.JRadioButton radioOpcion2;
-    private javax.swing.JRadioButton radioOpcion3;
-    private javax.swing.JRadioButton radioOpcion4;
+    private javax.swing.JTextField messageInput;
+    private javax.swing.JRadioButton optionFour;
+    private javax.swing.JRadioButton optionOne;
+    private javax.swing.JRadioButton optionThree;
+    private javax.swing.JRadioButton optionTwo;
     // End of variables declaration//GEN-END:variables
 }

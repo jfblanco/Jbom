@@ -6,7 +6,9 @@
 package ar.laboratorio.software.jbom.domain;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import org.json.JSONObject;
 
 /**
  *
@@ -40,5 +42,17 @@ public class Pregunta {
 
     public void setOpciones(Set<String> opciones) {
         this.opciones = opciones;
+    }
+
+    public String toJSON() {
+        JSONObject jSONObject = new JSONObject();
+        Iterator<String> iterator = opciones.iterator();
+        
+        jSONObject.put("pregunta", preguntal);
+        jSONObject.put("opcionUno", iterator.next());
+        jSONObject.put("opcionDos", iterator.next());
+        jSONObject.put("opcionTres", iterator.next());
+        jSONObject.put("opcionCuatro", iterator.next());
+        return jSONObject.toString();
     }
 }

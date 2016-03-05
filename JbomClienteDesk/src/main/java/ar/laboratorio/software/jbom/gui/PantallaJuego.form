@@ -41,22 +41,15 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTextField1" max="32767" attributes="0"/>
+                      <Component id="messageInput" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="butonLeft" min="-2" pref="58" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="botonDown" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLayeredPane1" max="32767" attributes="0"/>
-                                  <Component id="butonUp" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jLayeredPane1" max="32767" attributes="0"/>
+                          <Component id="botonDown" max="32767" attributes="0"/>
+                          <Component id="butonUp" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="botonRight" min="-2" pref="58" max="-2" attributes="0"/>
@@ -72,13 +65,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="messageInput" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="butonLeft" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="butonUp" min="-2" pref="58" max="-2" attributes="0"/>
+                      <Component id="butonUp" min="-2" pref="46" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLayeredPane1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -110,15 +103,16 @@
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="inputPregunta" max="32767" attributes="0"/>
+                      <Component id="inputQuestion" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="radioOpcion4" min="-2" max="-2" attributes="0"/>
-                              <Component id="radioOpcion3" min="-2" max="-2" attributes="0"/>
-                              <Component id="radioOpcion2" min="-2" max="-2" attributes="0"/>
-                              <Component id="radioOpcion1" min="-2" max="-2" attributes="0"/>
+                              <Component id="answerButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="optionFour" min="-2" max="-2" attributes="0"/>
+                              <Component id="optionThree" min="-2" max="-2" attributes="0"/>
+                              <Component id="optionTwo" min="-2" max="-2" attributes="0"/>
+                              <Component id="optionOne" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="273" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="279" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -131,17 +125,19 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="inputPregunta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="inputQuestion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
-                  <Component id="radioOpcion1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="radioOpcion2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="radioOpcion3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="radioOpcion4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <Component id="optionOne" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="optionTwo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="optionThree" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="optionFour" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="answerButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -152,45 +148,44 @@
             <Property name="text" type="java.lang.String" value="Pregunta: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputPregunta">
+        <Component class="javax.swing.JTextField" name="inputQuestion">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputPreguntaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputQuestionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="radioOpcion1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jRadioButton1"/>
-          </Properties>
+        <Component class="javax.swing.JRadioButton" name="optionOne">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="optionOneActionPerformed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(radioOpcion1);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(optionOne);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="radioOpcion2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jRadioButton2"/>
-          </Properties>
+        <Component class="javax.swing.JRadioButton" name="optionTwo">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(radioOpcion2);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(optionTwo);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="radioOpcion3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jRadioButton3"/>
-          </Properties>
+        <Component class="javax.swing.JRadioButton" name="optionThree">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(radioOpcion3);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(optionThree);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="radioOpcion4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jRadioButton4"/>
-          </Properties>
+        <Component class="javax.swing.JRadioButton" name="optionFour">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(radioOpcion4);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonGroup1.add(optionFour);"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="answerButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Responder"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="answerButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -210,6 +205,9 @@
           <Image iconType="2" name="/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomClienteDesk/src/main/resources/imagenes/right_arrow.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRightActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonDown">
       <Properties>
@@ -217,6 +215,9 @@
           <Image iconType="2" name="/home/francisco/Documents/Facultad/LaboratorioDeSoftware/Jbom/JbomClienteDesk/src/main/resources/imagenes/down_arrow.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonDownActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="butonUp">
       <Properties>
@@ -228,7 +229,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butonUpActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="messageInput">
     </Component>
   </SubComponents>
 </Form>

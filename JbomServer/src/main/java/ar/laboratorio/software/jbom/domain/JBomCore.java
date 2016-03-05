@@ -8,9 +8,12 @@ package ar.laboratorio.software.jbom.domain;
 import ar.laboratorio.software.jbom.connection.JBomConnectionManager;
 import ar.laboratorio.software.jbom.core.state.JBomCoreState;
 import ar.laboratorio.software.jbom.core.state.JBomCoreStateWaiting;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.joda.time.DateTime;
 
 /**
@@ -31,6 +34,8 @@ public class JBomCore {
     private DateTime startTime;
     private DateTime endTime;
     private DateTime currentTime;
+    private Pregunta currentQuestion;
+    private JBomUser bomberMan;
     private List<Pregunta> preguntas = new ArrayList<Pregunta>();
     private List<JBomUser> jugadores = new ArrayList<JBomUser>();
     private List<JBomUser> jugadoresEnEspera = new ArrayList<JBomUser>();
@@ -52,7 +57,12 @@ public class JBomCore {
         jBomClock = new JBomClock(instance);
         jBomCoreState = new JBomCoreStateWaiting();
         jBomConnectionManager = new JBomConnectionManager();      
-        jBomClock.start();        
+        jBomClock.start();    
+        generateRandomQuestion();
+    }
+
+    public void generateRandomQuestion() {
+        currentQuestion = JBomCore.getInstance().getPreguntas().get(new Random().nextInt(JBomCore.getInstance().getPreguntas().size()));
     }
     
     public void recalcularGrafoDeJuego(){
@@ -69,8 +79,22 @@ public class JBomCore {
         startTime = DateTime.now();
         endTime = startTime.plusMinutes(Integer.valueOf(jBomGUI.getPantallaInicial().getInputTiempoDeJuego().getText().split(":")[0]));
         jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(startTime.toString("mm:ss"));
-        jugadores.get(new Random().nextInt(jugadores.size())).tenesLaBomba();
+        this.setUserWithBomb();        
         jBomCoreState.changeState();
+    }
+
+    public void setUserWithBomb() {
+        generateRandomQuestion();
+        if(jugadores.size() > 0){
+            try {
+                bomberMan = jugadores.get(new Random().nextInt(jugadores.size()));
+                bomberMan.youHaveTheBomb();
+            } catch (IOException ex) {
+                jugadores.remove(bomberMan);
+                Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "El jugador: "+bomberMan.getUsername()+" esta caido, se procede a eliminarlo", ex);
+                this.setUserWithBomb();
+            }
+        }
     }
     
     public void updatePlaying(){
@@ -82,8 +106,18 @@ public class JBomCore {
     
     public void broadCastMessage(String message){
         for(JBomUser jBomUser : jugadores){
-            jBomUser.sendMessage(message);
+            jBomUser.sendMessage(message, "info", currentQuestion.toJSON());            
         }
+    }  
+
+    public void answerRigth() {
+        bomberMan.sendMessage("Respuesta correcta, usa las flechas para deshacerte de la bomba", "rigth", currentQuestion.toJSON());
+    }
+
+    public void answerWrong() {
+        this.broadCastMessage(bomberMan.getUsername()+" contesto incorrectamente");
+        generateRandomQuestion();
+        bomberMan.sendMessage("La Respesta es incorrecta!!", "wrong", currentQuestion.toJSON());
     }
     
     public JBomGUI getjBomGUI() {
@@ -196,5 +230,29 @@ public class JBomCore {
 
     public void setCurrentTime(DateTime currentTime) {
         this.currentTime = currentTime;
+    }
+
+    public DateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(DateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Pregunta getCurrentQuestion() {
+        return currentQuestion;
+    }
+
+    public void setCurrentQuestion(Pregunta currentQuestion) {
+        this.currentQuestion = currentQuestion;
+    }
+
+    public JBomUser getBomberMan() {
+        return bomberMan;
+    }
+
+    public void setBomberMan(JBomUser bomberMan) {
+        this.bomberMan = bomberMan;
     }
 }

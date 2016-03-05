@@ -7,8 +7,6 @@ package ar.laboratorio.software.jbom.gui;
 
 import ar.laboratorio.software.jbom.domain.JBomDesktopClient;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -67,7 +65,6 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre:");
 
-        inputName.setText("Jugador");
         inputName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputNameActionPerformed(evt);
@@ -137,6 +134,10 @@ public class PantallaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputNameActionPerformed
 
+    public void setInputName(String name){
+        inputName.setText(name);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inputName;
     private javax.swing.JTextField inputPort;

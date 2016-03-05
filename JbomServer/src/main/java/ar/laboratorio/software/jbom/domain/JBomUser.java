@@ -5,12 +5,15 @@
  */
 package ar.laboratorio.software.jbom.domain;
 
+import ar.laboratorio.software.jbom.connection.JBomUserInputConnection;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.json.JSONObject;
@@ -63,6 +66,7 @@ public class JBomUser {
         userIcon.setDisabledIcon(new ImageIcon(JBomCore.getInstance().getjBomGUI().getPantallaJuego().getGamePanel().getImageUsuarioConBomba()));
         
         this.setVecinos(posX.intValue(),posY.intValue());
+        new Thread(new JBomUserInputConnection(socket)).start();
     }
     
     private void setVecinos(Integer x, Integer y){
@@ -93,12 +97,30 @@ public class JBomUser {
         vecinoOesteLabel.setText(String.valueOf(this.gameId));
     }   
 
-    void sendMessage(String message) {
-        
+    void sendMessage(String message, String code, String question) {
+        try {
+            JSONObject jSONObject = new JSONObject();
+            jSONObject.put("message", message);
+            jSONObject.put("code", code);
+            jSONObject.put("pregunta", question);
+            this.dataOutputStream.writeBytes(jSONObject.toString()+"\n");
+            this.dataOutputStream.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(JBomUser.class.getName()).log(Level.SEVERE, "Jugador "+this.username+" desconectado");
+            userIcon.removeAll();
+            JBomCore.getInstance().getJugadores().remove(this);
+            JBomCore.getInstance().setUserWithBomb();
+        }
     }
     
-    void tenesLaBomba() {
+    public void youHaveTheBomb() throws IOException {
         this.userIcon.setEnabled(false);
+        this.sendMessage("La Bomba la tienes tu", "bomb", JBomCore.getInstance().getCurrentQuestion().toJSON());
+    }
+
+    public void througthTheBomb() {
+        this.userIcon.setEnabled(true);
+        JBomCore.getInstance().getjBomGUI().mostrarMensaje("El jugador "+this.username+" contesto correctamente");
     }
     
     public DataInputStream getDataInputStream() {
