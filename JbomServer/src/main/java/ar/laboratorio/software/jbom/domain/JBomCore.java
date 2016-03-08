@@ -35,6 +35,7 @@ public class JBomCore {
     private DateTime endTime;
     private DateTime currentTime;
     private Pregunta currentQuestion;
+    private Integer currentRound = 1;
     private JBomUser bomberMan;
     private List<Pregunta> preguntas = new ArrayList<Pregunta>();
     private List<JBomUser> jugadores = new ArrayList<JBomUser>();
@@ -79,8 +80,26 @@ public class JBomCore {
         startTime = DateTime.now();
         endTime = startTime.plusMinutes(Integer.valueOf(jBomGUI.getPantallaInicial().getInputTiempoDeJuego().getText().split(":")[0]));
         jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(startTime.toString("mm:ss"));
+        jBomGUI.getPantallaJuego().setNumeroDeRonda(currentRound);
         this.setUserWithBomb();        
         jBomCoreState.changeState();
+    }
+    
+    public void comenzarContadorNuevaRonda() {
+        jBomGUI.mostrarMensaje("Nueva Ronda");
+        startTime = DateTime.now();
+        endTime = startTime.plusMinutes(Integer.valueOf(jBomGUI.getPantallaInicial().getInputTiempoDeJuego().getText().split(":")[0]));
+        jBomGUI.getPantallaJuego().setNumeroDeRonda(currentRound);
+        this.setUserWithBomb();
+    }
+    
+    public void comenzarNuevaRonda() {
+        jBomGUI.mostrarMensaje("Ronda finalizada");
+        startTime = DateTime.now();
+        endTime = startTime.plusSeconds(5);
+        jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(startTime.toString("mm:ss"));
+        jBomGUI.getPantallaJuego().setNumeroDeRonda(currentRound);
+        this.setUserWithBomb();      
     }
 
     public void setUserWithBomb() {
@@ -98,6 +117,13 @@ public class JBomCore {
     }
     
     public void updatePlaying(){
+        currentTime = DateTime.now();
+        jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(endTime.minus(currentTime.getMillis()).toString("mm:ss"));
+        if(endTime.minus(currentTime.getMillis()).getMillis() <= 0.0)
+            jBomCoreState.changeState();
+    }
+    
+    public void updateWaitingNewRound(){
         currentTime = DateTime.now();
         jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(endTime.minus(currentTime.getMillis()).toString("mm:ss"));
         if(endTime.minus(currentTime.getMillis()).getMillis() <= 0.0)
@@ -254,5 +280,22 @@ public class JBomCore {
 
     public void setBomberMan(JBomUser bomberMan) {
         this.bomberMan = bomberMan;
+    }
+
+    public Integer getCurrentRound() {
+        return currentRound;
+    }
+
+    public void setCurrentRound(Integer currentRound) {
+        this.currentRound = currentRound;
+    }
+
+    public void endGame() {
+        JBomCore.getInstance().getjBomGUI().mostrarMensaje("Juego Finalizado");
+        JBomCore.getInstance().getjBomGUI().mostrarMensaje("----------------");
+        JBomCore.getInstance().getjBomGUI().mostrarMensaje(" ");
+        for(JBomUser jugador : jugadores){
+            JBomCore.getInstance().getjBomGUI().mostrarMensaje(jugador.getUsername()+": "+jugador.getRondasPerdidas());
+        }
     }
 }

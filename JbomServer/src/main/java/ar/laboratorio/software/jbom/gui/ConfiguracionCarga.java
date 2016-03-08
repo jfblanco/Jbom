@@ -23,6 +23,7 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
         inputPuerto.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getPort()));
         inputTiempoEsperaMaximo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getTiempoMaximo()));
         inputTiempoJuego.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getTiempoMinimo()));
+        inputCantidadDeRondas.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getCantidadDeRondas()));
     }
 
     /**
@@ -46,6 +47,8 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
         inputPuerto = new javax.swing.JTextField();
         inputTiempoJuego = new javax.swing.JTextField();
         inputTiempoEsperaMaximo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        inputCantidadDeRondas = new javax.swing.JTextField();
 
         jLabel1.setText("Pantalla de Configuracion");
 
@@ -66,6 +69,14 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Cantidad de Rondas: ");
+
+        inputCantidadDeRondas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputCantidadDeRondasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,29 +84,35 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(inputJugadoresMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputTiempoEsperaMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botonGuardar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputTiempoJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputJugadoresMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(142, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonGuardar)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(inputJugadoresMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputTiempoEsperaMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inputTiempoJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputJugadoresMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputCantidadDeRondas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 136, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -123,7 +140,11 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(inputTiempoEsperaMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(inputCantidadDeRondas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(botonGuardar)
                 .addContainerGap())
         );
@@ -137,12 +158,18 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
         JBomCore.getInstance().getjBomConfig().setJugadoresMinimo(Integer.valueOf(inputJugadoresMinimo.getText()));
         JBomCore.getInstance().getjBomConfig().setTiempoMaximo(Integer.valueOf(inputTiempoJuego.getText()));
         JBomCore.getInstance().getjBomConfig().setTiempoMinimo(Integer.valueOf(inputTiempoEsperaMaximo.getText()));
+        JBomCore.getInstance().getjBomConfig().setCantidadDeRondas(Integer.valueOf(inputCantidadDeRondas.getText()));
         JBomCore.getInstance().getjBomConfig().salvar();
         this.setVisible(false);
     }//GEN-LAST:event_botonGuardarActionPerformed
 
+    private void inputCantidadDeRondasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCantidadDeRondasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputCantidadDeRondasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonGuardar;
+    private javax.swing.JTextField inputCantidadDeRondas;
     private javax.swing.JTextField inputJugadoresMaximo;
     private javax.swing.JTextField inputJugadoresMinimo;
     private javax.swing.JTextField inputPuerto;
@@ -154,5 +181,6 @@ public class ConfiguracionCarga extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

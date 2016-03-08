@@ -22,6 +22,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         inputJugadoresMaximo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getJugadoresMaximo()));
         inputJugadoresMinimo.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getJugadoresMinimo()));
         inputTiempoDeJuego.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getTiempoMinimo()));
+        inputRondas.setText(String.valueOf(JBomCore.getInstance().getjBomConfig().getCantidadDeRondas()));
     }
 
     /**
@@ -44,6 +45,8 @@ public class PantallaInicial extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        inputRondas = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuArribaPregunta = new javax.swing.JMenuItem();
@@ -90,6 +93,14 @@ public class PantallaInicial extends javax.swing.JFrame {
         });
 
         jLabel6.setText("minutos");
+
+        jLabel7.setText("Cantidad de Rondas: ");
+
+        inputRondas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputRondasActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Cargar");
 
@@ -156,7 +167,11 @@ public class PantallaInicial extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputTiempoDeJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6))
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputRondas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jCheckBox1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -177,7 +192,9 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(inputTiempoDeJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(inputRondas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
@@ -208,6 +225,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         JBomCore.getInstance().getjBomConfig().setJugadoresMaximo(Integer.valueOf(inputJugadoresMaximo.getText()));
         JBomCore.getInstance().getjBomConfig().setJugadoresMinimo(Integer.valueOf(inputJugadoresMinimo.getText()));
         JBomCore.getInstance().getjBomConfig().setTiempoMaximo(Integer.valueOf(inputTiempoDeJuego.getText()));
+        JBomCore.getInstance().getjBomConfig().setCantidadDeRondas(Integer.valueOf(inputRondas.getText()));
         this.setVisible(false);    
         JBomCore.getInstance().getjBomGUI().getPantallaJuego().setVisible(true);    
         JBomCore.getInstance().abrirPuerto();
@@ -221,9 +239,14 @@ public class PantallaInicial extends javax.swing.JFrame {
        JBomCore.getInstance().setRecalcularGrafo(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jCheckBox1StateChanged
 
+    private void inputRondasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputRondasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputRondasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inputJugadoresMaximo;
     private javax.swing.JTextField inputJugadoresMinimo;
+    private javax.swing.JTextField inputRondas;
     private javax.swing.JTextField inputTiempoDeJuego;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
@@ -233,6 +256,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -104,6 +104,10 @@
                       <Component id="inputTiempoDeJuego" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="inputRondas" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -130,6 +134,8 @@
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="inputTiempoDeJuego" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputRondas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
@@ -197,6 +203,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="minutos"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cantidad de Rondas: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="inputRondas">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputRondasActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

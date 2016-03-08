@@ -12,11 +12,7 @@ import ar.laboratorio.software.jbom.domain.JBomUser;
  *
  * @author Francisco Blanco <blanco.jose.francisco@gmail.com>
  */
-public class JBomCoreStateEnding implements JBomCoreState{
-    
-    public JBomCoreStateEnding(){
-        JBomCore.getInstance().endGame();
-    }
+public class JBomCoreStateRounEnding implements JBomCoreState{
 
     public void jugadorConectado(JBomUser jBomUser) {
         
@@ -24,10 +20,12 @@ public class JBomCoreStateEnding implements JBomCoreState{
 
     public void changeState() {
         JBomCore.getInstance().getjBomGUI().getPantallaJuego().getTiempoDeJuego().setText("--:--");
+        JBomCore.getInstance().comenzarContadorNuevaRonda();
+        JBomCore.getInstance().setjBomCoreState(new JBomCoreStatePlaying());
     }
 
     public void update() {
-        
+        JBomCore.getInstance().updateWaitingNewRound();
     }
     
 }

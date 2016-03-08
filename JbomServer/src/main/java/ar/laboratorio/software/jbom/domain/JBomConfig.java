@@ -27,6 +27,7 @@ public class JBomConfig {
     private Integer tiempoMinimo = 0;
     private Integer jugadoresMinimo = 0;
     private Integer jugadoresMaximo = 0;
+    private Integer cantidadDeRondas = 5;
     private Integer port = 1509;
     private String direccionIp;
     private JSONObject configuraciones = new JSONObject();
@@ -40,6 +41,7 @@ public class JBomConfig {
             tiempoMinimo= configuraciones.getInt("tiempoMinimo");
             jugadoresMinimo= configuraciones.getInt("jugadoresMinimo");
             jugadoresMaximo= configuraciones.getInt("jugadoresMaximo");
+            cantidadDeRondas= configuraciones.getInt("cantidadDeRondas");
             port= configuraciones.getInt("port");
             JSONArray preguntas = configuraciones.getJSONArray("preguntas");
             for(Integer i=0; i < preguntas.length(); i++)
@@ -66,6 +68,7 @@ public class JBomConfig {
         configuraciones.put("tiempoMinimo", tiempoMinimo);
         configuraciones.put("jugadoresMinimo", jugadoresMinimo);
         configuraciones.put("jugadoresMaximo", jugadoresMaximo);
+        configuraciones.put("cantidadDeRondas", cantidadDeRondas);
         configuraciones.put("port", port);
         JSONArray preguntasJson = new JSONArray();
         for(Pregunta pregunta : JBomCore.getInstance().getPreguntas())
@@ -142,6 +145,20 @@ public class JBomConfig {
     public void setDireccionIp(String direccionIp) {
         this.direccionIp = direccionIp;
     }
-    
-    
+
+    public Integer getCantidadDeRondas() {
+        return cantidadDeRondas;
+    }
+
+    public void setCantidadDeRondas(Integer cantidadDeRondas) {
+        this.cantidadDeRondas = cantidadDeRondas;
+    }
+
+    public JSONObject getConfiguraciones() {
+        return configuraciones;
+    }
+
+    public void setConfiguraciones(JSONObject configuraciones) {
+        this.configuraciones = configuraciones;
+    }    
 }

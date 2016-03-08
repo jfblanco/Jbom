@@ -15,9 +15,18 @@ import ar.laboratorio.software.jbom.domain.JBomUser;
 public class JBomCoreStatePlaying implements JBomCoreState{
 
     public void changeState() {
-        JBomCore.getInstance().getjBomGUI().mostrarMensaje("Se Termino el tiempo de juego");        
         JBomCore.getInstance().getjBomGUI().getPantallaJuego().getTiempoDeJuego().setText("--:--");
-        JBomCore.getInstance().setjBomCoreState(new JBomCoreStateEnding());
+        if(JBomCore.getInstance().getCurrentRound() == JBomCore.getInstance().getjBomConfig().getCantidadDeRondas()){
+            JBomCore.getInstance().getBomberMan().youLose();
+            JBomCore.getInstance().setjBomCoreState(new JBomCoreStateEnding());
+        }
+        if(JBomCore.getInstance().getCurrentRound() < JBomCore.getInstance().getjBomConfig().getCantidadDeRondas()){
+            JBomCore.getInstance().setCurrentRound(JBomCore.getInstance().getCurrentRound() + 1);
+            JBomCore.getInstance().getjBomGUI().getPantallaJuego().setNumeroDeRonda(JBomCore.getInstance().getCurrentRound());
+            JBomCore.getInstance().getBomberMan().youLose();
+            JBomCore.getInstance().comenzarNuevaRonda();
+            JBomCore.getInstance().setjBomCoreState(new JBomCoreStateRounEnding());
+        }
     }
 
     public void update() {

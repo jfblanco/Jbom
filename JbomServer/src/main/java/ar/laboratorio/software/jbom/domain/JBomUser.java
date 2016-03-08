@@ -40,6 +40,7 @@ public class JBomUser {
     private JLabel vecinoSurLabel;
     private JLabel vecinoEsteLabel;
     private JLabel vecinoOesteLabel;
+    private Integer rondasPerdidas = 0;
     
     public void crearJugador(Socket socket) throws IOException{
         this.dataInputStream = new DataInputStream(socket.getInputStream());
@@ -253,5 +254,17 @@ public class JBomUser {
 
     public void setVecinoOesteLabel(JLabel vecinoOesteLabel) {
         this.vecinoOesteLabel = vecinoOesteLabel;
+    }
+
+    public void youLose() {
+        rondasPerdidas++;
+    }
+
+    public Integer getRondasPerdidas() {
+        return rondasPerdidas;
+    }
+
+    public void setRondasPerdidas(Integer rondasPerdidas) {
+        this.rondasPerdidas = rondasPerdidas;
     }
 }

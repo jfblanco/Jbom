@@ -36,6 +36,8 @@ public class PantallaJuego extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tiempoDeJuego = new javax.swing.JLabel();
         gameCanvas = new GamePanel();
+        jLabel4 = new javax.swing.JLabel();
+        numeroDeRondas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -71,6 +73,10 @@ public class PantallaJuego extends javax.swing.JFrame {
             .addGap(0, 407, Short.MAX_VALUE)
         );
 
+        jLabel4.setText("Ronda Numero: ");
+
+        numeroDeRondas.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,9 +91,13 @@ public class PantallaJuego extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
+                        .addGap(15, 15, 15)
                         .addComponent(jLabel2)
-                        .addGap(157, 157, 157)
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numeroDeRondas)
+                        .addGap(130, 130, 130)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(tiempoDeJuego)
@@ -104,7 +114,9 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(tiempoDeJuego))
+                    .addComponent(tiempoDeJuego)
+                    .addComponent(jLabel4)
+                    .addComponent(numeroDeRondas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gameCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -142,7 +154,9 @@ public class PantallaJuego extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel numeroDeRondas;
     private javax.swing.JLabel tiempoDeJuego;
     // End of variables declaration//GEN-END:variables
 
@@ -153,4 +167,8 @@ public class PantallaJuego extends javax.swing.JFrame {
     public void setTiempoDeJuego(JLabel tiempoDeJuego) {
         this.tiempoDeJuego = tiempoDeJuego;
     }    
+
+    public void setNumeroDeRonda(Integer currentRound) {
+        numeroDeRondas.setText(String.valueOf(currentRound));
+    }
 }
