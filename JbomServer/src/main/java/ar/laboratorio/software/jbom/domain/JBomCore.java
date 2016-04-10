@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 
 /**
  *
- * @author francisco
+ * @author Francisco Blanco <blanco.jose.francisco@gmail.com>
  */
 public class JBomCore {
     
@@ -96,10 +96,24 @@ public class JBomCore {
     public void comenzarNuevaRonda() {
         jBomGUI.mostrarMensaje("Ronda finalizada");
         startTime = DateTime.now();
-        endTime = startTime.plusSeconds(5);
+        endTime = startTime.plusSeconds(10);
         jBomGUI.getPantallaJuego().getTiempoDeJuego().setText(startTime.toString("mm:ss"));
         jBomGUI.getPantallaJuego().setNumeroDeRonda(currentRound);
-        this.setUserWithBomb();      
+        this.explodeBoom();      
+    }
+
+    private void explodeBoom() {
+        generateRandomQuestion();
+        if(jugadores.size() > 0){
+            try {
+                this.broadCastMessage("La Bombar le exploto a: "+bomberMan.getUsername());
+                bomberMan.theBoomHaveExplodeOnYou();
+            } catch (IOException ex) {
+                jugadores.remove(bomberMan);
+                Logger.getLogger(JBomCore.class.getName()).log(Level.INFO, "El jugador: "+bomberMan.getUsername()+" esta caido, se procede a eliminarlo", ex);
+                this.setUserWithBomb();
+            }
+        }
     }
 
     public void setUserWithBomb() {
@@ -291,6 +305,8 @@ public class JBomCore {
     }
 
     public void endGame() {
+        this.broadCastMessage("El Juego termino, el jugador ganador es: "+jugadores.get(0).getUsername());
+        jugadores.get(jugadores.size()-1).youWon();
         JBomCore.getInstance().getjBomGUI().mostrarMensaje("Juego Finalizado");
         JBomCore.getInstance().getjBomGUI().mostrarMensaje("----------------");
         JBomCore.getInstance().getjBomGUI().mostrarMensaje(" ");

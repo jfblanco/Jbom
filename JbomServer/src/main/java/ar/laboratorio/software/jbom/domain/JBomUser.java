@@ -118,6 +118,11 @@ public class JBomUser {
         this.userIcon.setEnabled(false);
         this.sendMessage("La Bomba la tienes tu", "bomb", JBomCore.getInstance().getCurrentQuestion().toJSON());
     }
+    
+    public void theBoomHaveExplodeOnYou() throws IOException {
+        this.userIcon.setEnabled(true);
+        this.sendMessage("La Bomba te exploto, debiste ser mas rapido!", "explosion", JBomCore.getInstance().getCurrentQuestion().toJSON());
+    }
 
     public void througthTheBomb() {
         this.userIcon.setEnabled(true);
@@ -266,5 +271,10 @@ public class JBomUser {
 
     public void setRondasPerdidas(Integer rondasPerdidas) {
         this.rondasPerdidas = rondasPerdidas;
+    }
+
+    void youWon() {
+        this.userIcon.setEnabled(true);
+        this.sendMessage("Ganaste!!!", "youwon", JBomCore.getInstance().getCurrentQuestion().toJSON());
     }
 }
